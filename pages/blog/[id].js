@@ -46,7 +46,7 @@ const SingleVendor = () => {
         {singleData && (
           <>
             <main className="bg-grey pb-30">
-              {singleData.createdBy === authUser.uid && (
+              {singleData.createdBy === authUser?.uid && (
                 <div
                   style={{
                     display: "flex",
