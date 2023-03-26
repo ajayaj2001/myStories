@@ -5,3 +5,7 @@
 .multi-select {
   width: 15rem;
 }
+
+.ck-editor__editable {
+  max-height: 30rem;
+}
