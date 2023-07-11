@@ -25,7 +25,7 @@ function PageSearch() {
     });
   };
 
-  const itemsPerPage = 1;
+  const itemsPerPage = 6;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = blogList.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(blogList.length / itemsPerPage);
