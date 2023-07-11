@@ -20,7 +20,7 @@ const Menu = () => {
             <nav>
               <ul className="main-menu d-none d-lg-inline font-small">
                 <li>
-                  <Link href="/category/travel">
+                  <Link href="/">
                     <a>Home</a>
                   </Link>
                 </li>
@@ -31,14 +31,19 @@ const Menu = () => {
                   </Link>
                 </li>
 
-                <li>
+                {/* <li>
                   <Link href="/category/Nature">
                     <a>Category</a>
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/about">
                     <a>About Me</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/auth/login">
+                    <a>Login</a>
                   </Link>
                 </li>
               </ul>
