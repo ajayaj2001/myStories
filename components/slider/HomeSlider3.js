@@ -31,16 +31,16 @@ const HomeSlider3 = () => {
                   <div className="container">
                     <div className="entry-meta meta-0 font-small mb-20">
                       <Link href={`/category/${item.category}`}>
-                        <a>
-                          <span className="post-cat text-info">
-                            {item.category}
-                          </span>
-                        </a>
+
+                        <span className="post-cat text-info">
+                          {item.category}
+                        </span>
+
                       </Link>
                     </div>
                     <h1 className="post-title mb-20 font-weight-900 text-white">
                       <Link href={`/blog/${item.id}`}>
-                        <a>{item.title}</a>
+                        {item.title}
                       </Link>
                     </h1>
                     <div className="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">

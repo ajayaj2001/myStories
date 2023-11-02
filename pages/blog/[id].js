@@ -24,7 +24,7 @@ const SingleVendor = () => {
   let Router = useRouter();
 
   const [singleData, setSingleData] = useState(null);
-  const { authUser } = useContext(authUserContext);
+  const { signOutUser, authUser } = useContext(authUserContext);
 
   const { id } = Router.query;
 
@@ -42,7 +42,7 @@ const SingleVendor = () => {
   };
   return (
     <>
-      <Layout>
+      <Layout authUser={authUser} signOutUser={signOutUser}>
         {singleData && (
           <>
             <main className="bg-grey pb-30">
@@ -90,22 +90,18 @@ const SingleVendor = () => {
                   </h1>
                   <div className="entry-meta align-items-center meta-2 font-small color-white">
                     <p className="mb-5">
-                      <Link href="/author">
-                        <a className="author-avatar" href="#">
-                          <img
-                            className="img-circle"
-                            src={singleData.userDetails.profileUrl}
-                            alt=""
-                          />
-                        </a>
+                      <Link href="/author" className="author-avatar">
+                        <img
+                          className="img-circle"
+                          src={singleData.userDetails.profileUrl}
+                          alt=""
+                        />
                       </Link>
                       By{" "}
                       <Link href={`/author/${singleData.userDetails.id}`}>
-                        <a>
-                          <span className="author-name font-weight-bold">
-                            {singleData.userDetails.name}
-                          </span>
-                        </a>
+                        <span className="author-name font-weight-bold">
+                          {singleData.userDetails.name}
+                        </span>
                       </Link>
                     </p>
                   </div>
@@ -123,7 +119,7 @@ const SingleVendor = () => {
                       <span>Tags: </span>
                       {singleData.category?.map((cat) => (
                         <Link key={cat} href={`/category/${cat}`}>
-                          <a>#{cat}</a>
+                          #{cat}
                         </Link>
                       ))}
                     </div>
@@ -192,13 +188,11 @@ const SingleVendor = () => {
                   <div className="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn animated">
                     <div className="author-image mb-30">
                       <Link href="/author">
-                        <a>
-                          <img
-                            src={singleData.userDetails.profileUrl}
-                            alt=""
-                            className="avatar"
-                          />
-                        </a>
+                        <img
+                          src={singleData.userDetails.profileUrl}
+                          alt=""
+                          className="avatar"
+                        />
                       </Link>
                     </div>
                     <div className="author-info">
@@ -206,7 +200,7 @@ const SingleVendor = () => {
                         <span className="vcard author">
                           <span className="fn">
                             <Link href="/author">
-                              <a>{singleData.userDetails.name}</a>
+                              {singleData.userDetails.name}
                             </Link>
                           </span>
                         </span>
@@ -215,40 +209,33 @@ const SingleVendor = () => {
                       <div className="author-description text-muted">
                         {singleData.userDetails.about}
                       </div>
-                      <Link href="/author">
-                        <a className="author-bio-link mb-md-0 mb-3">
-                          View all posts (
-                          {singleData.userDetails.blogList.length})
-                        </a>
+                      <Link
+                        href="/author"
+                        className="author-bio-link mb-md-0 mb-3"
+                      >
+                        View all posts ({singleData.userDetails.blogList.length}
+                        )
                       </Link>
                       <div className="author-social">
                         <ul className="author-social-icons">
                           <li className="author-social-link-facebook">
-                            <Link href="/#">
-                              <a target="_blank">
-                                <i className="ti-facebook"></i>
-                              </a>
+                            <Link href="/#" target="_blank">
+                              <i className="ti-facebook"></i>
                             </Link>
                           </li>
                           <li className="author-social-link-twitter">
-                            <Link href="/#">
-                              <a target="_blank">
-                                <i className="ti-twitter-alt"></i>
-                              </a>
+                            <Link href="/#" target="_blank">
+                              <i className="ti-twitter-alt"></i>
                             </Link>
                           </li>
                           <li className="author-social-link-pinterest">
-                            <Link href="/#">
-                              <a target="_blank">
-                                <i className="ti-pinterest"></i>
-                              </a>
+                            <Link href="/#" target="_blank">
+                              <i className="ti-pinterest"></i>
                             </Link>
                           </li>
                           <li className="author-social-link-instagram">
-                            <Link href="/#">
-                              <a target="_blank">
-                                <i className="ti-instagram"></i>
-                              </a>
+                            <Link href="/#" target="_blank">
+                              <i className="ti-instagram"></i>
                             </Link>
                           </li>
                         </ul>
@@ -276,49 +263,45 @@ const SingleVendor = () => {
                                       backgroundImage: `url(/assets/imgs/news/${item.img})`,
                                     }}
                                   >
-                                    <Link href={`/blog/${item.id}`}>
-                                      <a className="img-link"></a>
-                                    </Link>
+                                    <Link
+                                      href={`/blog/${item.id}`}
+                                      className="img-link"
+                                    ></Link>
                                   </div>
                                   <ul className="social-share">
                                     <li>
                                       <Link href="/#">
-                                        <a>
-                                          <i className="elegant-icon social_share"></i>
-                                        </a>
+                                        <i className="elegant-icon social_share"></i>
                                       </Link>
                                     </li>
                                     <li>
-                                      <Link href="/#">
-                                        <a
-                                          className="fb"
-                                          title="Share on Facebook"
-                                          target="_blank"
-                                        >
-                                          <i className="elegant-icon social_facebook"></i>
-                                        </a>
+                                      <Link
+                                        href="/#"
+                                        className="fb"
+                                        title="Share on Facebook"
+                                        target="_blank"
+                                      >
+                                        <i className="elegant-icon social_facebook"></i>
                                       </Link>
                                     </li>
                                     <li>
-                                      <Link href="/#">
-                                        <a
-                                          className="tw"
-                                          target="_blank"
-                                          title="Tweet now"
-                                        >
-                                          <i className="elegant-icon social_twitter"></i>
-                                        </a>
+                                      <Link
+                                        href="/#"
+                                        className="tw"
+                                        target="_blank"
+                                        title="Tweet now"
+                                      >
+                                        <i className="elegant-icon social_twitter"></i>
                                       </Link>
                                     </li>
                                     <li>
-                                      <Link href="/#">
-                                        <a
-                                          className="pt"
-                                          target="_blank"
-                                          title="Pin it"
-                                        >
-                                          <i className="elegant-icon social_pinterest"></i>
-                                        </a>
+                                      <Link
+                                        href="/#"
+                                        className="pt"
+                                        target="_blank"
+                                        title="Pin it"
+                                      >
+                                        <i className="elegant-icon social_pinterest"></i>
                                       </Link>
                                     </li>
                                   </ul>
@@ -328,16 +311,14 @@ const SingleVendor = () => {
                                 <div className="post-content">
                                   <div className="entry-meta meta-0 font-small mb-10">
                                     <Link href={`/blog/${item.id}`}>
-                                      <a>
-                                        <span className="post-cat text-primary">
-                                          {item.category}
-                                        </span>
-                                      </a>
+                                      <span className="post-cat text-primary">
+                                        {item.category}
+                                      </span>
                                     </Link>
                                   </div>
                                   <h5 className="post-title font-weight-900 mb-20">
                                     <Link href={`/blog/${item.id}`}>
-                                      <a>{item.title}</a>
+                                      {item.title}
                                     </Link>
                                     <span className="post-format-icon">
                                       <i className="elegant-icon icon_star_alt"></i>
@@ -373,19 +354,17 @@ const SingleVendor = () => {
                         <li className="mb-30">
                           <div className="d-flex hover-up-2 transition-normal">
                             <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                              <Link href="/single">
-                                <a className="color-white">
-                                  <img
-                                    src="/assets/imgs/news/thumb-1.jpg"
-                                    alt=""
-                                  />
-                                </a>
+                              <Link href="/single" className="color-white">
+                                <img
+                                  src="/assets/imgs/news/thumb-1.jpg"
+                                  alt=""
+                                />
                               </Link>
                             </div>
                             <div className="post-content media-body">
                               <h6 className="post-title mb-15 text-limit-2-row font-medium">
                                 <Link href="/single">
-                                  <a>The Best Time to Travel to Cambodia</a>
+                                  The Best Time to Travel to Cambodia
                                 </Link>
                               </h6>
                               <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
@@ -400,21 +379,17 @@ const SingleVendor = () => {
                         <li className="mb-10">
                           <div className="d-flex hover-up-2 transition-normal">
                             <div className="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
-                              <Link href="/single">
-                                <a className="color-white">
-                                  <img
-                                    src="/assets/imgs/news/thumb-2.jpg"
-                                    alt=""
-                                  />
-                                </a>
+                              <Link href="/single" className="color-white">
+                                <img
+                                  src="/assets/imgs/news/thumb-2.jpg"
+                                  alt=""
+                                />
                               </Link>
                             </div>
                             <div className="post-content media-body">
                               <h6 className="post-title mb-15 text-limit-2-row font-medium">
                                 <Link href="/single">
-                                  <a>
-                                    20 Photos to Inspire You to Visit Cambodia
-                                  </a>
+                                  20 Photos to Inspire You to Visit Cambodia
                                 </Link>
                               </h6>
                               <div className="entry-meta meta-1 float-left font-x-small text-uppercase">

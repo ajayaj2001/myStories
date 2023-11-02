@@ -10,6 +10,7 @@ const EditorContainer = ({ userDetail }) => {
   const [inputDoc, setInputDoc] = useState("");
   const [error, setError] = useState("");
   const [visibility, setVisibility] = useState(false);
+  const [subscribers, setSubscribers] = useState(false);
   const [category, setCategory] = useState([]);
   const [tagSelected, setTagSelected] = useState([]);
   const updateCategoryList = () => {
@@ -32,7 +33,9 @@ const EditorContainer = ({ userDetail }) => {
     } else {
       setError("");
       e.target.visibility.value = visibility;
+      e.target.subscribers.value = subscribers;
       e.target.category = { value: tagSelected.map((tag) => tag.value) };
+      console.log(e, "category");
       createBlog(e, inputDoc, userDetail).then(() => {
         alert("success");
         e.target.reset();
@@ -75,7 +78,7 @@ const EditorContainer = ({ userDetail }) => {
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "100%",
+              width: "130%",
               alignItems: "center",
             }}
           >
@@ -104,13 +107,13 @@ const EditorContainer = ({ userDetail }) => {
             style={{
               display: "flex",
               flexDirection: "row",
-              width: "100%",
+              width: "80%",
               alignItems: "center",
             }}
           >
             <div className="switch-wrapper">
               <div className="label-container">
-                <label className="mr-2">Visibility :</label>
+                <label className="">Visibility :</label>
               </div>
               <label className="switch-container">
                 <input
@@ -120,6 +123,38 @@ const EditorContainer = ({ userDetail }) => {
                   id="with-warrenty"
                   checked={visibility}
                   onChange={(e) => setVisibility(e.target.checked)}
+                />
+                <div className="switch-bg"></div>
+                <div className="round-box"></div>
+                <div className="switch-left">
+                  <span>NO</span>
+                </div>
+                <div className="switch-right">
+                  <span>YES</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "80%",
+              alignItems: "center",
+            }}
+          >
+            <div className="switch-wrapper">
+              <div className="label-container">
+                <label className="">Subscribers only :</label>
+              </div>
+              <label className="switch-container">
+                <input
+                  hidden
+                  type="checkbox"
+                  name="subscribers"
+                  id="with-warrenty"
+                  checked={subscribers}
+                  onChange={(e) => setSubscribers(e.target.checked)}
                 />
                 <div className="switch-bg"></div>
                 <div className="round-box"></div>

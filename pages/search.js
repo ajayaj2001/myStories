@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import ReactPaginate from "react-paginate";
 import {
@@ -11,6 +11,7 @@ import {
   TwitterShareButton,
 } from "react-share";
 import Layout from "../components/layout/layout";
+import { authUserContext } from "../context";
 import { fetchBlogTags, getBlogsByFilter } from "../firebaseConfig/operations";
 function PageSearch() {
   const [blogList, setBlogList] = useState([]);
@@ -18,6 +19,7 @@ function PageSearch() {
   const [itemOffset, setItemOffset] = useState(0);
   const [tagSelected, setTagSelected] = useState([]);
   const [category, setCategory] = useState([]);
+  const { authUser, signOutUser } = useContext(authUserContext);
 
   const updateCategoryList = () => {
     fetchBlogTags().then((tags) => {
@@ -60,7 +62,7 @@ function PageSearch() {
 
   return (
     <>
-      <Layout>
+      <Layout authUser={authUser} signOutUser={signOutUser}>
         <main>
           {/* <!--archive header--> */}
           <div className="archive-header pt-50">
@@ -140,16 +142,15 @@ function PageSearch() {
                                       backgroundImage: `url(${blog.coverImage})`,
                                     }}
                                   >
-                                    <Link href={`/blog/${blog.id}`}>
-                                      <a className="img-link"></a>
-                                    </Link>
+                                    <Link
+                                      href={`/blog/${blog.id}`}
+                                      className="img-link"
+                                    ></Link>
                                   </div>
                                   <ul className="social-share">
                                     <li>
                                       <Link href="/#">
-                                        <a>
-                                          <i className="elegant-icon social_share"></i>
-                                        </a>
+                                        <i className="elegant-icon social_share"></i>
                                       </Link>
                                     </li>
                                     <li>
@@ -187,17 +188,15 @@ function PageSearch() {
                                   <div className="entry-meta meta-0 font-small mb-10">
                                     {blog.category?.map((tag) => (
                                       <Link key={tag} href={`/category/${tag}`}>
-                                        <a>
-                                          <span className="post-cat text-primary">
-                                            #{tag}
-                                          </span>
-                                        </a>
+                                        <span className="post-cat text-primary">
+                                          #{tag}
+                                        </span>
                                       </Link>
                                     ))}
                                   </div>
                                   <h5 className="post-title font-weight-900 mb-20">
                                     <Link href={`/blog/${blog.id}`}>
-                                      <a>{blog.title}</a>
+                                      {blog.title}
                                     </Link>
                                     <span className="post-format-icon">
                                       <i className="elegant-icon icon_star_alt"></i>
@@ -277,13 +276,11 @@ function PageSearch() {
                                 </div>
                               </div>
                               <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                <Link href="/#">
-                                  <a className="color-white">
-                                    <img
-                                      src="/assets/imgs/news/thumb-6.jpg"
-                                      alt=""
-                                    />
-                                  </a>
+                                <Link href="/#" className="color-white">
+                                  <img
+                                    src="/assets/imgs/news/thumb-6.jpg"
+                                    alt=""
+                                  />
                                 </Link>
                               </div>
                             </div>
@@ -304,13 +301,11 @@ function PageSearch() {
                                 </div>
                               </div>
                               <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                <Link href="/#">
-                                  <a className="color-white">
-                                    <img
-                                      src="/assets/imgs/news/thumb-7.jpg"
-                                      alt=""
-                                    />
-                                  </a>
+                                <Link href="/#" className="color-white">
+                                  <img
+                                    src="/assets/imgs/news/thumb-7.jpg"
+                                    alt=""
+                                  />
                                 </Link>
                               </div>
                             </div>
@@ -331,13 +326,11 @@ function PageSearch() {
                                 </div>
                               </div>
                               <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                <Link href="/#">
-                                  <a className="color-white">
-                                    <img
-                                      src="/assets/imgs/news/thumb-2.jpg"
-                                      alt=""
-                                    />
-                                  </a>
+                                <Link href="/#" className="color-white">
+                                  <img
+                                    src="/assets/imgs/news/thumb-2.jpg"
+                                    alt=""
+                                  />
                                 </Link>
                               </div>
                             </div>
@@ -359,13 +352,11 @@ function PageSearch() {
                                 </div>
                               </div>
                               <div className="post-thumb post-thumb-80 d-flex ml-15 border-radius-5 img-hover-scale overflow-hidden">
-                                <Link href="/#">
-                                  <a className="color-white">
-                                    <img
-                                      src="/assets/imgs/news/thumb-3.jpg"
-                                      alt=""
-                                    />
-                                  </a>
+                                <Link href="/#" className="color-white">
+                                  <img
+                                    src="/assets/imgs/news/thumb-3.jpg"
+                                    alt=""
+                                  />
                                 </Link>
                               </div>
                             </div>
@@ -381,105 +372,93 @@ function PageSearch() {
                       <div className="instagram-gellay">
                         <ul className="insta-feed">
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-3.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-1.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-1.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-4.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-2.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-2.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-5.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-3.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-3.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-3.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-4.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-4.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-4.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-5.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-5.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-5.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-6.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-6.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                         </ul>

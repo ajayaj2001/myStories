@@ -41,6 +41,7 @@ export const createBlog = async (e, content, userDetail) => {
       return e.id;
     })
     .catch((err) => console.log(err));
+  console.log("testing", value);
 
   await addDoc(collection(db, "blogs"), {
     title: value.title.value,
@@ -51,6 +52,7 @@ export const createBlog = async (e, content, userDetail) => {
     views: 0,
     likes: 0,
     visibility: value.visibility.value,
+    subscribers: value.subscribers.value,
     category: value.category.value,
     createdOn: serverTimestamp(),
   }).catch((err) => console.log(err));

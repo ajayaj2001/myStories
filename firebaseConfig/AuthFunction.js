@@ -61,7 +61,7 @@ export default function useFirebaseAuth() {
     });
   };
 
-  const signOutUser = () => signOut.then(clear);
+  const signOutUser = () => signOut(auth).then(clear);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, authStateChanged);

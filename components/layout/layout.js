@@ -6,7 +6,7 @@ import Sidebar from "./sidebar";
 import BackToTop from "../elements/backToTop";
 import Head from "next/head";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, authUser, signOutUser }) => {
   const addClass = () => {
     document.body.classList.add("canvas-opened");
   };
@@ -26,7 +26,12 @@ const Layout = ({ children }) => {
         <meta property="og:title" content="My page title" key="title" />
       </Head>
       <Sidebar removeClass={removeClass} />
-      <Header addClass={addClass} openSearch={openSearch} />
+      <Header
+        addClass={addClass}
+        openSearch={openSearch}
+        authUser={authUser}
+        signOutUser={signOutUser}
+      />
 
       {children}
 

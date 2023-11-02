@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useState } from "react";
-
-const Menu = () => {
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
+const Menu = ({ authUser, signOutUser }) => {
   const [scroll, setScroll] = useState(0);
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -11,7 +10,6 @@ const Menu = () => {
       }
     });
   });
-
   return (
     <>
       <div className={scroll ? "header-sticky sticky-bar" : "header-sticky"}>
@@ -20,68 +18,58 @@ const Menu = () => {
             <nav>
               <ul className="main-menu d-none d-lg-inline font-small">
                 <li>
-                  <Link href="/">
-                    <a>Home</a>
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/search">
-                    <a>Search</a>
-                  </Link>
-                </li>
-
-                {/* <li>
-                  <Link href="/category/Nature">
-                    <a>Category</a>
-                  </Link>
-                </li> */}
-                <li>
-                  <Link href="/about">
-                    <a>About Me</a>
-                  </Link>
+                  <Link href="/">Home</Link>
                 </li>
                 <li>
-                  <Link href="/auth/login">
-                    <a>Login</a>
-                  </Link>
+                  <Link href="/search">Search</Link>
                 </li>
+                <li>
+                  <Link href="/about">About Me</Link>
+                </li>
+                {authUser?.uid ? (
+                  <li onClick={async () => await signOutUser()}>
+                    <Link href="/auth/login">SignOut</Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link href="/auth/login">Login</Link>
+                  </li>
+                )}
+                {authUser?.uid && (
+                  <li>
+                    <Link href="/dashboard/create">Create</Link>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
           <div className="float-right header-tools text-muted font-small">
             <ul className="header-social-network d-inline-block list-inline mr-15">
               <li className="list-inline-item">
-                <Link href="/#">
-                  <a
-                    className="social-icon fb text-xs-center"
-                    target="_blank"
-                    href="#"
-                  >
-                    <i className="elegant-icon social_facebook"></i>
-                  </a>
+                <Link
+                  href="/#"
+                  className="social-icon fb text-xs-center"
+                  target="_blank"
+                >
+                  <i className="elegant-icon social_facebook"></i>
                 </Link>
               </li>
               <li className="list-inline-item">
-                <Link href="/#">
-                  <a
-                    className="social-icon tw text-xs-center"
-                    target="_blank"
-                    href="#"
-                  >
-                    <i className="elegant-icon social_twitter "></i>
-                  </a>
+                <Link
+                  href="/#"
+                  className="social-icon tw text-xs-center"
+                  target="_blank"
+                >
+                  <i className="elegant-icon social_twitter "></i>
                 </Link>
               </li>
               <li className="list-inline-item">
-                <Link href="/#">
-                  <a
-                    className="social-icon pt text-xs-center"
-                    target="_blank"
-                    href="#"
-                  >
-                    <i className="elegant-icon social_pinterest "></i>
-                  </a>
+                <Link
+                  href="/#"
+                  className="social-icon pt text-xs-center"
+                  target="_blank"
+                >
+                  <i className="elegant-icon social_pinterest "></i>
                 </Link>
               </li>
             </ul>

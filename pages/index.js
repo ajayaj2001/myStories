@@ -3,10 +3,14 @@ import Layout from "./../components/layout/layout";
 import PostCarousel1 from "./../components/slider/PostCarousel1";
 import post from "../data/post.json";
 import author from "../data/author.json";
+import { authUserContext } from "../context";
+import { useContext } from "react";
+
 function Home() {
+  const { signOutUser, authUser } = useContext(authUserContext);
   return (
     <>
-      <Layout>
+      <Layout signOutUser={signOutUser} authUser={authUser}>
         <main>
           <div className="featured-1">
             <div className="container">
@@ -92,47 +96,47 @@ function Home() {
                           backgroundImage: `url(assets/imgs/news/${item.img})`,
                         }}
                       >
-                        <Link href={`/blog/${item.id}`}>
-                          <a className="img-link"></a>
-                        </Link>
+                        <Link
+                          href={`/blog/${item.id}`}
+                          className="img-link"
+                        ></Link>
                         <span className="top-right-icon bg-success">
                           <i className="elegant-icon icon_camera_alt"></i>
                         </span>
                         <ul className="social-share">
                           <li>
                             <Link href="#">
-                              <a>
-                                <i className="elegant-icon social_share"></i>
-                              </a>
+                              <i className="elegant-icon social_share"></i>
                             </Link>
                           </li>
                           <li>
-                            <Link href="#">
-                              <a
-                                className="fb"
-                                title="Share on Facebook"
-                                target="_blank"
-                              >
-                                <i className="elegant-icon social_facebook"></i>
-                              </a>
+                            <Link
+                              href="#"
+                              className="fb"
+                              title="Share on Facebook"
+                              target="_blank"
+                            >
+                              <i className="elegant-icon social_facebook"></i>
                             </Link>
                           </li>
                           <li>
-                            <Link href="#">
-                              <a
-                                className="tw"
-                                target="_blank"
-                                title="Tweet now"
-                              >
-                                <i className="elegant-icon social_twitter"></i>
-                              </a>
+                            <Link
+                              href="#"
+                              className="tw"
+                              target="_blank"
+                              title="Tweet now"
+                            >
+                              <i className="elegant-icon social_twitter"></i>
                             </Link>
                           </li>
                           <li>
-                            <Link href="#">
-                              <a className="pt" target="_blank" title="Pin it">
-                                <i className="elegant-icon social_pinterest"></i>
-                              </a>
+                            <Link
+                              href="#"
+                              className="pt"
+                              target="_blank"
+                              title="Pin it"
+                            >
+                              <i className="elegant-icon social_pinterest"></i>
                             </Link>
                           </li>
                         </ul>
@@ -140,18 +144,14 @@ function Home() {
                       <div className="post-content p-30">
                         <div className="entry-meta meta-0 font-small mb-10">
                           <Link href={`/category/${item.category}`}>
-                            <a>
-                              <span className="post-cat text-info">
-                                {item.category}
-                              </span>
-                            </a>
+                            <span className="post-cat text-info">
+                              {item.category}
+                            </span>
                           </Link>
                         </div>
                         <div className="d-flex post-card-content">
                           <h5 className="post-title mb-20 font-weight-900">
-                            <Link href={`/blog/${item.id}`}>
-                              <a>{item.title}</a>
-                            </Link>
+                            <Link href={`/blog/${item.id}`}>{item.title}</Link>
                           </h5>
                           <div className="entry-meta meta-1 float-left font-x-small text-uppercase">
                             <span className="post-on">{item.date}</span>
@@ -193,49 +193,45 @@ function Home() {
                                     backgroundImage: `url(assets/imgs/news/${item.img})`,
                                   }}
                                 >
-                                  <Link href={`/blog/${item.id}`}>
-                                    <a className="img-link"></a>
-                                  </Link>
+                                  <Link
+                                    href={`/blog/${item.id}`}
+                                    className="img-link"
+                                  ></Link>
                                 </div>
                                 <ul className="social-share">
                                   <li>
                                     <Link href="/#">
-                                      <a>
-                                        <i className="elegant-icon social_share"></i>
-                                      </a>
+                                      <i className="elegant-icon social_share"></i>
                                     </Link>
                                   </li>
                                   <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="fb"
-                                        title="Share on Facebook"
-                                        target="_blank"
-                                      >
-                                        <i className="elegant-icon social_facebook"></i>
-                                      </a>
+                                    <Link
+                                      href="/#"
+                                      className="fb"
+                                      title="Share on Facebook"
+                                      target="_blank"
+                                    >
+                                      <i className="elegant-icon social_facebook"></i>
                                     </Link>
                                   </li>
                                   <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="tw"
-                                        target="_blank"
-                                        title="Tweet now"
-                                      >
-                                        <i className="elegant-icon social_twitter"></i>
-                                      </a>
+                                    <Link
+                                      href="/#"
+                                      className="tw"
+                                      target="_blank"
+                                      title="Tweet now"
+                                    >
+                                      <i className="elegant-icon social_twitter"></i>
                                     </Link>
                                   </li>
                                   <li>
-                                    <Link href="/#">
-                                      <a
-                                        className="pt"
-                                        target="_blank"
-                                        title="Pin it"
-                                      >
-                                        <i className="elegant-icon social_pinterest"></i>
-                                      </a>
+                                    <Link
+                                      href="/#"
+                                      className="pt"
+                                      target="_blank"
+                                      title="Pin it"
+                                    >
+                                      <i className="elegant-icon social_pinterest"></i>
                                     </Link>
                                   </li>
                                 </ul>
@@ -245,16 +241,14 @@ function Home() {
                               <div className="post-content">
                                 <div className="entry-meta meta-0 font-small mb-10">
                                   <Link href={`/category/${item.category}`}>
-                                    <a>
-                                      <span className="post-cat text-primary">
-                                        {item.category}
-                                      </span>
-                                    </a>
+                                    <span className="post-cat text-primary">
+                                      {item.category}
+                                    </span>
                                   </Link>
                                 </div>
                                 <h5 className="post-title font-weight-900 mb-20">
                                   <Link href={`/blog/${item.id}`}>
-                                    <a>{item.title}</a>
+                                    {item.title}
                                   </Link>
                                   <span className="post-format-icon">
                                     <i className="elegant-icon icon_star_alt"></i>
@@ -280,37 +274,33 @@ function Home() {
                     <nav aria-label="Page navigation example">
                       <ul className="pagination justify-content-start">
                         <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">
-                              <i className="elegant-icon arrow_left"></i>
-                            </a>
+                          <Link href="/#" className="page-link">
+                            <i className="elegant-icon arrow_left"></i>
                           </Link>
                         </li>
                         <li className="page-item active">
-                          <Link href="/#">
-                            <a className="page-link">01</a>
+                          <Link href="/#" className="page-link">
+                            01
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">02</a>
+                          <Link href="/#" className="page-link">
+                            02
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">03</a>
+                          <Link href="/#" className="page-link">
+                            03
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">04</a>
+                          <Link href="/#" className="page-link">
+                            04
                           </Link>
                         </li>
                         <li className="page-item">
-                          <Link href="/#">
-                            <a className="page-link">
-                              <i className="elegant-icon arrow_right"></i>
-                            </a>
+                          <Link href="/#" className="page-link">
+                            <i className="elegant-icon arrow_right"></i>
                           </Link>
                         </li>
                       </ul>
@@ -332,36 +322,33 @@ function Home() {
                           <strong>Follow me: </strong>
                           <ul className="header-social-network d-inline-block list-inline color-white mb-20">
                             <li className="list-inline-item">
-                              <Link href="/#">
-                                <a
-                                  className="fb"
-                                  target="_blank"
-                                  title="Facebook"
-                                >
-                                  <i className="elegant-icon social_facebook"></i>
-                                </a>
+                              <Link
+                                href="/#"
+                                className="fb"
+                                target="_blank"
+                                title="Facebook"
+                              >
+                                <i className="elegant-icon social_facebook"></i>
                               </Link>
                             </li>
                             <li className="list-inline-item">
-                              <Link href="/#">
-                                <a
-                                  className="tw"
-                                  target="_blank"
-                                  title="Tweet now"
-                                >
-                                  <i className="elegant-icon social_twitter"></i>
-                                </a>
+                              <Link
+                                href="/#"
+                                className="tw"
+                                target="_blank"
+                                title="Tweet now"
+                              >
+                                <i className="elegant-icon social_twitter"></i>
                               </Link>
                             </li>
                             <li className="list-inline-item">
-                              <Link href="/#">
-                                <a
-                                  className="pt"
-                                  target="_blank"
-                                  title="Pin it"
-                                >
-                                  <i className="elegant-icon social_pinterest"></i>
-                                </a>
+                              <Link
+                                href="/#"
+                                className="pt"
+                                target="_blank"
+                                title="Pin it"
+                              >
+                                <i className="elegant-icon social_pinterest"></i>
                               </Link>
                             </li>
                           </ul>
@@ -375,105 +362,93 @@ function Home() {
                       <div className="instagram-gellay">
                         <ul className="insta-feed">
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-3.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-1.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-1.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-4.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-2.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-2.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-5.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-3.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-3.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-3.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-4.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-4.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-4.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-5.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-5.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                           <li>
-                            <Link href="/#">
-                              <a
-                                href="/assets/imgs/thumbnail-5.jpg"
-                                className="play-video"
-                                data-animate="zoomIn"
-                                data-duration="1.5s"
-                                data-delay="0.1s"
-                              >
-                                <img
-                                  className="border-radius-5"
-                                  src="/assets/imgs/news/thumb-6.jpg"
-                                  alt=""
-                                />
-                              </a>
+                            <Link
+                              href="/#"
+                              className="play-video"
+                              data-animate="zoomIn"
+                              data-duration="1.5s"
+                              data-delay="0.1s"
+                            >
+                              <img
+                                className="border-radius-5"
+                                src="/assets/imgs/news/thumb-6.jpg"
+                                alt=""
+                              />
                             </Link>
                           </li>
                         </ul>

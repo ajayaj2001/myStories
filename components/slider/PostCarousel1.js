@@ -30,16 +30,16 @@ const PostCarousel1 = () => {
                 <div className="post-content-overlay text-white ml-30 mr-30 pb-30">
                   <div className="entry-meta meta-0 font-small mb-20">
                     <Link href={`/category/${item.category}`}>
-                      <a>
-                        <span className="post-cat text-info">
-                          {item.category}
-                        </span>
-                      </a>
+
+                      <span className="post-cat text-info">
+                        {item.category}
+                      </span>
+
                     </Link>
                   </div>
                   <h3 className="post-title font-weight-900 mb-20">
                     <Link href={`/blog/${item.id}`}>
-                      <a>{item.title}</a>
+                      {item.title}
                     </Link>
                   </h3>
                   <div className="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">
