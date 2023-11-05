@@ -37,8 +37,19 @@ function PageSearch() {
     if (tagSelected.length > 0) {
       tags = tagSelected.map((tag) => tag.value);
     }
-    let val = await getBlogsByFilter(searchText, tags);
-    setBlogList(val);
+    let blogs = await getBlogsByFilter(searchText, tags);
+    const filterBlogs = (blogs, authUser) =>
+      blogs.filter((blog) => {
+        const visibility =
+          blog.visibility === "true" && blog.subscribers === "false";
+        const subscribers =
+          authUser?.uid &&
+          blog.subscribers === "true" &&
+          blog.visibility === "true";
+        return visibility || subscribers;
+      });
+
+    setBlogList(filterBlogs(blogs, authUser));
   };
 
   const handlePageClick = (event) => {
