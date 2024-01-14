@@ -23,6 +23,18 @@ const EditorContainer = ({ userDetail }) => {
     updateCategoryList();
   }, []);
 
+  useEffect(() => {
+    const handleUnload = (e) => {
+      e.preventDefault();
+      e.returnValue =
+        "You have unsaved changes, are you sure you want to leave?";
+    };
+    window.addEventListener("beforeunload", handleUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, []);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,7 +47,6 @@ const EditorContainer = ({ userDetail }) => {
       e.target.visibility.value = visibility;
       e.target.subscribers.value = subscribers;
       e.target.category = { value: tagSelected.map((tag) => tag.value) };
-      console.log(e, "category");
       createBlog(e, inputDoc, userDetail).then(() => {
         alert("success");
         e.target.reset();

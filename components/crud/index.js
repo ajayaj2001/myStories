@@ -71,6 +71,18 @@ const CrudEditor = ({ blogDetails }) => {
     }
   }, [blogDetails]);
 
+  useEffect(() => {
+    const handleUnload = (e) => {
+      e.preventDefault();
+      e.returnValue =
+        "You have unsaved changes, are you sure you want to leave?";
+    };
+    window.addEventListener("beforeunload", handleUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, []);
+
   return (
     <div
       style={{
